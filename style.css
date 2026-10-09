@@ -16,23 +16,29 @@ body {
   color: white;
 }
 
-#viewport {
-  position: relative;
+#main_viewport {
   width: 90vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.viewport {
+  position: relative;
+  width: 100%;
   padding: 1rem 0;
   background: #1d2029;
   border-radius: 8px;
 }
 
-#track {
+.track {
   position: relative;
   display: flex;
   gap: 0.6rem;
   will-change: transform;
 }
 
-#marker {
+.marker {
   position: absolute;
   left: 50%;
   top: 0;
@@ -46,7 +52,7 @@ body {
 .card {
   padding: 0.6rem;
   flex: 0 0 12rem;
-  height: 20rem;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,20 +1,30 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" type="module" defer></script>
-    <title>Case Openning Simulator :)</title>
-  </head>
-  <body>
-    <!--TODO: melhorar o visual-->
 
-    <div id="viewport">
-      <div id="marker"></div>
-      <div id="track"></div>
-    </div>
-    <button id="spin-btn">Abrir caixa</button>
-    <p id="result"></p>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" type="module" defer></script>
+  <script src="utils/constants.js" type="module" defer></script>
+  <script src="js/trackConstructor.js" type="module" defer></script>
+  <title>Case Openning Simulator :)</title>
+</head>
+
+<body>
+  <!--TODO: melhorar o visual-->
+
+  <main id="main_viewport"></main>
+
+  <section>
+    <select id="cases_quantity">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+    <button id="spin_btn">Abrir caixa</button>
+  </section>
+  <p id="result"></p>
+</body>
+
 </html>

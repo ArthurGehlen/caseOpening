@@ -1,25 +1,13 @@
 import { ITEMS } from "./js/items.js";
+import { TrackConstructor } from "./js/trackConstructor.js";
+import { RARITIES } from "./utils/constants.js";
 
-// TODO: criar uma classe para os itens
-
-const RARITIES = {
-  industrial: { label: "Industrial Grade", color: "#5e98d9", chance: 65 },
-  milspec: { label: "Mil-Spec Grade", color: "#5169f7", chance: 25 },
-  restricted: { label: "Restricted", color: "#a574ff", chance: 7 },
-  classified: { label: "Classified", color: "#e050f0", chance: 2.5 },
-  covert: { label: "Covert", color: "#f26767", chance: 0.5 },
-};
-
-const track = document.getElementById("track");
-const viewport = document.getElementById("viewport");
-const btn = document.getElementById("spin-btn");
+const main_viewport = document.getElementById("main_viewport");
+const btn = document.getElementById("spin_btn");
 const result = document.getElementById("result");
+const cases_quantity_input = document.getElementById("cases_quantity");
 
-const TOTAL_CARDS = 55;
-const WINNER_INDEX = 45;
-const SPIN_TIME = "6s";
-
-let spinning = false;
+let tracks = [];
 
 function draw_item() {
   const total = Object.values(RARITIES).reduce(
@@ -58,58 +46,44 @@ function create_card(item) {
   img.src = item.img;
   img.alt = item.name;
 
-  const name = document.createElement("p");
-  name.textContent = item.name;
-
-  card.append(img, name);
+  card.append(img);
   return card;
 }
 
-function generate_cards(winner = null) {
-  track.innerHTML = "";
+function render_tracks() {
+  const quantity = Number(cases_quantity_input.value);
 
-  for (let i = 0; i < TOTAL_CARDS; i++) {
-    const item = winner && i === WINNER_INDEX ? winner : draw_item();
-    track.appendChild(create_card(item));
-  }
-}
-
-function spin() {
-  if (spinning) return;
-  spinning = true;
-  btn.disabled = true;
+  main_viewport.innerHTML = "";
   result.textContent = "";
 
-  const winner = draw_item();
-
-  track.style.transition = "none";
-  track.style.transform = "translateX(0)";
-  generate_cards(winner);
-
-  const winner_element = track.children[WINNER_INDEX];
-
-  track.offsetWidth;
-
-  const winner_center =
-    winner_element.offsetLeft + winner_element.offsetWidth / 2;
-  const viewport_center = viewport.offsetWidth / 2;
-  const jitter = (Math.random() - 0.5) * winner_element.offsetWidth * 0.8;
-  const distance = winner_center - viewport_center + jitter;
-
-  track.style.transition = `transform ${SPIN_TIME} cubic-bezier(0.15, 0, 0.10, 1)`;
-  track.style.transform = `translateX(${-distance}px)`;
-
-  track.addEventListener(
-    "transitionend",
-    () => {
-      result.textContent = `Você ganhou: ${winner.name} (${RARITIES[winner.rarity].label})`;
-      spinning = false;
-      btn.disabled = false;
-    },
-    { once: true },
-  );
+  tracks = Array.from({ length: quantity }, () => {
+    const track = new TrackConstructor({
+      container: main_viewport,
+      createCard: create_card,
+      drawItem: draw_item,
+    });
+    track.build_track();
+    track.generate_cards();
+    return track;
+  });
 }
 
-document.addEventListener("DOMContentLoaded", () => generate_cards());
+cases_quantity_input.addEventListener("change", render_tracks);
 
-btn.addEventListener("click", spin);
+btn.addEventListener("click", async () => {
+  btn.disabled = true;
+  cases_quantity_input.disabled = true;
+  result.textContent = "";
+
+  const winners = tracks.map(() => draw_item());
+  await Promise.all(tracks.map((t, i) => t.spin(winners[i])));
+
+  result.textContent = winners
+    .map((w) => `${w.name} (${RARITIES[w.rarity].label})`)
+    .join(", ");
+
+  btn.disabled = false;
+  cases_quantity_input.disabled = false;
+});
+
+render_tracks();
