@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case Opening - Caixa</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/case.css" />
+    <link rel="stylesheet" href="css/result.css" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script type="module" src="js/pages/case.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <a href="home.html" class="back_link">
+        <i class="fa-solid fa-arrow-left"></i> Voltar
+      </a>
+
+      <h1 id="case_title" class="page_title">Carregando...</h1>
+
+      <section id="main_viewport" class="tracks"></section>
+
+      <p id="message" class="form_message is_error" role="alert" hidden></p>
+
+      <section class="controls">
+        <label class="qty">
+          Caixas
+          <input type="number" id="cases_quantity" min="1" max="3" value="1" />
+        </label>
+        <span id="cost_label" class="cost"></span>
+        <button type="button" id="spin_btn" class="btn_primary">
+          Abrir caixa
+        </button>
+      </section>
+    </main>
+  </body>
+</html>

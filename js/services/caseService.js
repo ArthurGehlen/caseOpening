@@ -28,3 +28,13 @@ export async function open_cases(case_id, quantity) {
   if (error) throw error;
   return data;
 }
+
+// itens que pertencem a uma caixa (para a fita decorativa)
+export async function list_case_items(case_id) {
+  const { data, error } = await supabase
+    .from("case_items")
+    .select("items(id, name, rarity, img, price)")
+    .eq("case_id", case_id);
+  if (error) throw error;
+  return data.map((row) => row.items);
+}
