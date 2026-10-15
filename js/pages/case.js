@@ -1,5 +1,5 @@
 import { require_auth } from "../utils/guard.js";
-import { mount_navbar } from "../components/navbar.js";
+import { mount_navbar } from "../components/navBar.js";
 import { TrackConstructor } from "../components/TrackConstructor.js";
 import { create_result_modal } from "../components/resultModal.js";
 import {
