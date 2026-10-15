@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case Opening - Criar conta</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+    <script type="module" src="js/pages/signup.js"></script>
+  </head>
+  <body>
+    <main class="auth_card">
+      <h1>Criar conta</h1>
+
+      <form id="signup_form">
+        <div class="field">
+          <label for="username">Nome de usuário</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            autocomplete="username"
+            required
+            minlength="3"
+            maxlength="20"
+            title="3 a 20 caracteres: letras, números e _"
+          />
+        </div>
+
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="password">Senha</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="new-password"
+            required
+            minlength="6"
+          />
+        </div>
+
+        <div class="field">
+          <label for="confirm_password">Confirmar senha</label>
+          <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            autocomplete="new-password"
+            required
+            minlength="6"
+          />
+        </div>
+
+        <p id="form_message" class="form_message" role="alert" hidden></p>
+
+        <button type="submit" id="submit_btn" class="btn_primary">
+          Criar conta
+        </button>
+      </form>
+
+      <p class="auth_footer">Já tem conta? <a href="login.html">Entrar</a></p>
+    </main>
+  </body>
+</html>

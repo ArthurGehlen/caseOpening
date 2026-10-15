@@ -1,0 +1,72 @@
+.auth_card {
+  width: 100%;
+  max-width: 35rem;
+  padding: 2rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: 0 1rem 4rem rgb(0 0 0 / 0.4);
+}
+
+.auth_card h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.auth_card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.field input {
+  padding: 0.7rem 0.8rem;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.field input:focus {
+  border-color: var(--accent);
+}
+
+.field input:user-invalid {
+  border-color: var(--danger);
+}
+
+.form_message {
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.form_message.is_error {
+  background: rgb(242 103 103 / 0.15);
+  color: var(--danger);
+}
+
+.form_message.is_success {
+  background: rgb(59 165 93 / 0.15);
+  color: var(--success);
+}
+
+.auth_footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}

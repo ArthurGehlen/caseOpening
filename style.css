@@ -1,19 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Clarity+City:ital,wght@0,100..900;1,100..900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: "Clarity City", "Inter", sans-serif;
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1.5rem;
-  background: #14161c;
-  color: white;
+  background: hsl(225, 17%, 9%);
+  color: hsl(0, 0%, 100%);
 }
 
 #main_viewport {
@@ -27,7 +30,7 @@ body {
   position: relative;
   width: 100%;
   padding: 1rem 0;
-  background: #1d2029;
+  background: hsl(225, 17%, 14%);
   border-radius: 8px;
 }
 
@@ -44,8 +47,8 @@ body {
   top: 0;
   bottom: 0;
   width: 0.2rem;
-  background: gold;
-  z-index: 2;
+  background: hsl(51, 100%, 50%);
+  z-index: 1;
   transform: translateX(-50%);
 }
 
@@ -57,8 +60,195 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  background: #2a2e3b;
+  background: hsl(226, 17%, 20%);
   border-bottom: 0.4rem solid var(--color);
   border-radius: 0.4rem;
   font-size: 0.8rem;
+}
+
+#cases_quantity,
+#spin_btn {
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  border: 1px solid hsl(226, 17%, 20%);
+  border-radius: 0.4rem;
+  background-color: transparent;
+  color: hsl(0, 0%, 100%);
+  font-size: 1rem;
+  transition:
+    0.4s ease border-color,
+    0.4s ease background-color;
+}
+
+#spin_btn {
+  background-color: hsl(120, 65%, 39%);
+}
+
+#spin_btn:focus {
+  scale: 0.9;
+}
+
+#spin_btn:hover {
+  background-color: hsl(120, 65%, 50%);
+}
+
+#spin_btn:disabled {
+  color: hsl(0, 0%, 30%);
+  background-color: hsl(0, 0%, 50%);
+}
+
+#cases_quantity option {
+  color: hsl(226, 17%, 20%);
+}
+
+#cases_quantity:hover {
+  border-color: hsl(0, 0%, 100%);
+}
+
+#spin_btn:disabled:hover,
+#cases_quantity:disabled:hover {
+  border-color: hsl(226, 17%, 20%);
+}
+
+#confirmation_modal_wrapper {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: hsl(0, 0%, 0%, 0.6);
+  z-index: 2;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container do modal (ajuste conforme o seu) */
+#modal_container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgb(0 0 0 / 0.75);
+  z-index: 10;
+}
+
+.result_wrapper {
+  --color: #888;
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #1d2029;
+  border: 2px solid var(--color);
+  border-radius: 10px;
+  animation: result_in 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.result_wrapper:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.result_wrapper:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.result_img {
+  width: 100%;
+  height: 12rem;
+  object-fit: contain;
+}
+
+.result_rarity {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color);
+}
+
+.result_name {
+  text-align: center;
+  font-weight: 600;
+  color: var(--color);
+}
+
+.result_value {
+  font-size: 0.9rem;
+  color: #9aa3b5;
+}
+
+.result_status {
+  min-height: 1.2em;
+  font-size: 0.85rem;
+  color: #9aa3b5;
+}
+
+.result_actions_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.result_actions_wrapper button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    filter 0.15s,
+    transform 0.15s;
+}
+
+.result_actions_wrapper button:hover:not(:disabled) {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+.result_actions_wrapper button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.keep_skin_btn {
+  background: #2a2e3b;
+  color: white;
+}
+
+.sell_skin_btn {
+  background: #3ba55d;
+  color: white;
+}
+
+.result_wrapper.is_sold {
+  opacity: 0.6;
+  filter: grayscale(0.6);
+  box-shadow: none;
+}
+
+.result_wrapper.is_leaving {
+  animation: result_out 0.25s ease-in forwards;
+}
+
+@keyframes result_in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes result_out {
+  to {
+    opacity: 0;
+    transform: scale(0.85);
+  }
 }

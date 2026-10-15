@@ -20,6 +20,7 @@ export class TrackConstructor {
     build_track() {
         this.container.appendChild(this.viewport);
         this.viewport.append(this.marker, this.track);
+        this.generate_cards();
     }
 
     generate_cards(winner = null) {
@@ -30,7 +31,7 @@ export class TrackConstructor {
         }
     }
 
-    spin(winner) {
+    spin(winner = this.drawItem()) {
         return new Promise((resolve) => {
             if (this.spinning) return resolve(null);
             this.spinning = true;
