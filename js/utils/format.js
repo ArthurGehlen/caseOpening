@@ -1,5 +1,11 @@
 export const format_price = (value) =>
-  Number(value ?? 0).toLocaleString("pt-BR", {
+  Number(value ?? 0).toLocaleString("en-US", {
     style: "currency",
-    currency: "BRL",
+    currency: "USD",
+  });
+
+export const format_date = (iso) =>
+  new Date(iso).toLocaleString("pt-BR", {
+    dateStyle: "short",
+    timeStyle: "short",
   });

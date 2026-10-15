@@ -1,0 +1,160 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--surface);
+  border-bottom: 1px solid var(--surface-2);
+}
+
+.navbar_inner {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar_brand {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.navbar_links {
+  display: flex;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.navbar_link {
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.navbar_link:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.navbar_link.is_active {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.navbar_right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar_balance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.navbar_balance i {
+  font-size: 0.9rem;
+}
+
+.navbar_balance.is_pulsing {
+  animation: balance_pulse 0.5s ease;
+}
+
+.navbar_user {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.navbar_bonus,
+.navbar_logout {
+  padding: 0.4rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-size: .95rem;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.navbar_bonus {
+  background: var(--success);
+  color: white;
+  animation: bonus_glow 1.8s ease-in-out infinite;
+}
+
+.navbar_logout {
+  background: var(--danger);
+  color: var(--text);
+}
+
+.navbar_bonus:hover:not(:disabled),
+.navbar_logout:hover {
+  filter: brightness(1.15);
+}
+
+.navbar_bonus:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.container {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page_title {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+
+.status {
+  color: var(--muted);
+}
+
+@keyframes balance_pulse {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bonus_glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(59 165 93 / 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgb(59 165 93 / 0);
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar_inner {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .navbar_links {
+    order: 3;
+    width: 100%;
+    flex: none;
+  }
+  .navbar_user {
+    display: none;
+  }
+}

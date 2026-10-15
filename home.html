@@ -3,18 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Case Opening - Home</title>
+    <title>Caixas</title>
     <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/home.css" />
     <script type="module" src="js/pages/home.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
   </head>
   <body>
-    <!--Por hora apenas um placeholder-->
-    <main style="text-align: center">
-      <h1>Home</h1>
-      <p>Logado como <strong id="user_email"></strong></p>
-      <button id="logout_btn" class="btn_primary" style="margin-top: 1rem">
-        Sair
-      </button>
+    <main class="container">
+      <h1 class="page_title">Escolha uma caixa</h1>
+      <p id="status" class="status">Carregando...</p>
+      <section id="cases_grid" class="cases_grid"></section>
     </main>
   </body>
 </html>

@@ -19,12 +19,15 @@
 
 body {
   min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+body.is_centered {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: var(--bg);
-  color: var(--text);
 }
 
 a {
