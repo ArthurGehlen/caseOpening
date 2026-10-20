@@ -130,3 +130,11 @@
   background: rgb(242 103 103 / 0.15);
   color: var(--danger);
 }
+
+.negative_amount {
+  color: var(--danger);
+}
+
+.positive_amount {
+  color: var(--success);
+}

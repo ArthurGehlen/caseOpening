@@ -24,12 +24,15 @@ export function create_result_modal() {
 
   feedback.append(feedback_img, feedback_caption);
 
+  const total_amount = document.createElement("p");
+  total_amount.classList.add("total_amount");
+
   const close_btn = document.createElement("button");
   close_btn.type = "button";
   close_btn.className = "result_close";
   close_btn.textContent = "Fechar";
 
-  overlay.append(cards, feedback, close_btn);
+  overlay.append(cards, total_amount, close_btn);
   document.body.appendChild(overlay);
 
   let on_close_cb = null;
@@ -52,11 +55,13 @@ export function create_result_modal() {
 
     items.forEach((item) => {
       cards.appendChild(
-        create_result_card(item, { on_sell, on_keep: () => {} }),
+        create_result_card(item, { on_sell, on_keep: () => { } }),
       );
     });
 
     const total_value = items.reduce((sum, w) => sum + Number(w.price), 0);
+    total_amount.textContent = `Lucro: R$ ${total_value}`;
+    total_value < cost ? total_amount.classList.toggle("negative_amount") : total_amount.classList.toggle("positive_amount")
     feedback.hidden = !(total_value < cost);
 
     overlay.hidden = false;
