@@ -1,5 +1,5 @@
 export class TrackConstructor {
-    constructor({ container, createCard, drawItem, totalCards = 55, winnerIndex = 45, spinTime = "6s" }) {
+    constructor({ container, createCard, drawItem, totalCards = 55, winnerIndex = 45, spinTime = "3.5s" }) {
         this.container = container;
         this.createCard = createCard;
         this.drawItem = drawItem;
