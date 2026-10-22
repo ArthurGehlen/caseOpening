@@ -1,0 +1,157 @@
+.stats_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat_card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+
+.stat_card i {
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+.stat_label {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.stat_value {
+  font-size: 1.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.dash_columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1rem;
+}
+
+.dash_panel {
+  padding: 1.25rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+
+.dash_panel h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.dash_panel h2 i {
+  color: var(--accent);
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 0.9rem;
+  list-style: none;
+}
+
+.leaderboard,
+.recent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  list-style: none;
+}
+
+.lb_row {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  background: var(--surface-2);
+  border-radius: 6px;
+  border: 2px solid transparent;
+}
+
+.lb_row.is_me {
+  border-color: var(--accent);
+}
+
+.lb_pos {
+  font-weight: 700;
+  color: var(--muted);
+  text-align: center;
+}
+
+.lb_name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lb_balance {
+  color: var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.lb_gap {
+  text-align: center;
+  color: var(--muted);
+  list-style: none;
+}
+
+.recent_row {
+  --color: #888;
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface-2);
+  border-left: 4px solid var(--color);
+  border-radius: 6px;
+}
+
+.recent_row img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+}
+
+.recent_info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.recent_name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color);
+}
+
+.recent_date {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.recent_diff {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.recent_diff.is_gain {
+  color: var(--success);
+}
+.recent_diff.is_loss {
+  color: var(--danger);
+}

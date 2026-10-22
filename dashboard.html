@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <script type="module" src="js/pages/dashboard.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <h1 class="page_title">Dashboard</h1>
+
+      <p id="message" class="form_message is_error" role="alert" hidden></p>
+
+      <section id="stats_grid" class="stats_grid"></section>
+
+      <div class="dash_columns">
+        <section class="dash_panel">
+          <h2><i class="fa-solid fa-trophy"></i> Ranking</h2>
+          <ol id="leaderboard" class="leaderboard"></ol>
+        </section>
+
+        <section class="dash_panel">
+          <h2>
+            <i class="fa-solid fa-clock-rotate-left"></i> Últimas aberturas
+          </h2>
+          <ul id="recent" class="recent"></ul>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
