@@ -6,4 +6,4 @@ export const RARITIES = {
   covert: { label: "Covert", color: "#f26767", chance: 0.5 },
 };
 export const IMAGE_FALLBACK = "https://placehold.co/200";
-export const MAX_CASES = 5;
+export const MAX_CASES = 15;
