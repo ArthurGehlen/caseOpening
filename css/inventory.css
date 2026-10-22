@@ -1,0 +1,186 @@
+.inv_summary {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.inv_stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+
+.inv_stat_label {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.inv_stat strong {
+  font-size: 1.3rem;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.inv_toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.inv_toolbar select {
+  padding: 0.5rem 0.75rem;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.inv_toolbar select:focus {
+  border-color: var(--accent);
+}
+
+.inv_select_all {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.inv_actions {
+  margin-left: auto;
+}
+
+.inv_btn {
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--success);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    filter 0.15s,
+    transform 0.15s;
+}
+
+.inv_btn:hover:not(:disabled) {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+.inv_btn:disabled {
+  background: var(--surface-2);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.inv_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 1rem;
+}
+
+.inv_card {
+  --color: #888;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1rem;
+  background: var(--surface);
+  border: 2px solid transparent;
+  border-bottom: 4px solid var(--color);
+  border-radius: var(--radius);
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.inv_card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--color) 30%, transparent);
+}
+
+.inv_card.is_selected {
+  border-color: var(--accent);
+}
+
+.inv_check {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+.inv_card img {
+  width: 100%;
+  height: 7rem;
+  object-fit: contain;
+}
+
+.inv_rarity {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color);
+}
+
+.inv_name {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color);
+}
+
+.inv_date {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.inv_sell {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.45rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.inv_sell:hover:not(:disabled) {
+  background: var(--success);
+}
+
+.inv_sell:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .inv_actions {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .inv_btn {
+    width: 100%;
+  }
+}

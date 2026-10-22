@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case Opening - Inventário</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/inventory.css" />
+    <script type="module" src="js/pages/inventory.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <h1 class="page_title">Inventário</h1>
+
+      <section class="inv_summary">
+        <div class="inv_stat">
+          <span class="inv_stat_label">Itens</span>
+          <strong id="stat_count">0</strong>
+        </div>
+        <div class="inv_stat">
+          <span class="inv_stat_label">Valor total</span>
+          <strong id="stat_value">R$ 0,00</strong>
+        </div>
+      </section>
+
+      <section class="inv_toolbar">
+        <select id="filter_rarity">
+          <option value="all">Todas as raridades</option>
+        </select>
+
+        <select id="sort_by">
+          <option value="recent">Mais recentes</option>
+          <option value="price_desc">Maior valor</option>
+          <option value="price_asc">Menor valor</option>
+          <option value="rarity">Raridade</option>
+        </select>
+
+        <label class="inv_select_all">
+          <input type="checkbox" id="select_all" />
+          Selecionar tudo
+        </label>
+
+        <div class="inv_actions">
+          <button type="button" id="sell_selected_btn" class="inv_btn" disabled>
+            Vender selecionados
+          </button>
+        </div>
+      </section>
+
+      <p id="message" class="form_message is_error" role="alert" hidden></p>
+      <p id="status" class="status">Carregando...</p>
+
+      <section id="inv_grid" class="inv_grid"></section>
+    </main>
+  </body>
+</html>

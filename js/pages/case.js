@@ -7,9 +7,9 @@ import {
   list_case_items,
   open_cases,
 } from "../services/caseService.js";
-import { sell_item } from "../services/inventoryService.js";
 import { RARITIES, MAX_CASES, IMAGE_FALLBACK } from "../utils/constants.js";
 import { format_price } from "../utils/format.js";
+import { sell_item, sell_items } from "../services/inventoryService.js";
 
 const session = await require_auth();
 if (!session) throw new Error("Sem sessão");
@@ -136,6 +136,10 @@ async function handle_spin() {
       cost: current_case.price * winners.length,
       on_sell: async (item) => {
         const new_balance = await sell_item(item.inventory_id);
+        navbar.set_balance(new_balance);
+      },
+      on_sell_all: async (items) => {
+        const new_balance = await sell_items(items.map((i) => i.inventory_id));
         navbar.set_balance(new_balance);
       },
       on_close: () => set_busy(false),

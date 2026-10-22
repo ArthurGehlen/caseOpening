@@ -78,5 +78,14 @@ export function create_result_card(item, { on_sell, on_keep }) {
   });
 
   wrapper.append(img, rarity_label, name, value, status, actions);
+
+  wrapper.mark_sold = () => {
+    wrapper.classList.add("is_sold");
+    actions.remove();
+    status.textContent = "Vendido!";
+  };
+
+  wrapper.is_sold = () => wrapper.classList.contains("is_sold");
+
   return wrapper;
 }
