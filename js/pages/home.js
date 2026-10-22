@@ -1,5 +1,5 @@
 import { require_auth } from "../utils/guard.js";
-import { mount_navbar } from "../components/navBar.js";
+import { mount_navbar } from "../components/navbar.js";
 import { list_cases } from "../services/caseService.js";
 import { format_price } from "../utils/format.js";
 import { IMAGE_FALLBACK } from "../utils/constants.js";
