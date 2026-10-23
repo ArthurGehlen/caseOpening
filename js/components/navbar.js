@@ -53,15 +53,20 @@ export async function mount_navbar() {
 
   const brand = el("a", "navbar__brand");
   brand.href = "home.html";
-  brand.innerHTML = `<span class="navbar__brand-text">Case Opening Simulator</span>`;
+  brand.innerHTML = `
+  <span class="navbar__brand-text">Case Opening Simulator</span>
+`;
 
   const links = el("div", "navbar__links");
   NAV_LINKS.forEach(({ href, label }) => {
     const link = el("a", "navbar__link", label);
     link.href = href;
     if (href === current) {
-      link.classList.add("is-active");
+      link.classList.add("is_active");
       link.setAttribute("aria-current", "page");
+      requestAnimationFrame(() =>
+        link.scrollIntoView({ inline: "center", block: "nearest" }),
+      );
     }
     links.appendChild(link);
   });
@@ -104,7 +109,7 @@ export async function mount_navbar() {
   `;
 
   actions.append(bonus_btn, balance, user, logout_btn);
-  inner.append(brand, links, actions);
+  inner.append(brand, actions, links);
   nav.appendChild(inner);
   document.body.prepend(nav);
 
@@ -113,7 +118,7 @@ export async function mount_navbar() {
   function apply_bonus_state(available) {
     bonus_btn.hidden = !available;
     bonus_btn.disabled = false;
-    bonus_btn.classList.remove("is-claimed");
+    bonus_btn.classList.remove("is_claimed");
     bonus_label.textContent = "Bônus";
   }
 
@@ -131,7 +136,7 @@ export async function mount_navbar() {
           : (result?.balance ?? result?.profile?.balance);
       if (typeof new_balance === "number") set_balance(new_balance);
 
-      bonus_btn.classList.add("is-claimed");
+      bonus_btn.classList.add("is_claimed");
       bonus_label.textContent = "Resgatado";
 
       try {
@@ -180,9 +185,9 @@ export async function mount_navbar() {
 
   function set_balance(value) {
     balance_value.textContent = format_price(value);
-    balance_value.classList.remove("is-updated");
+    balance_value.classList.remove("is_updated");
     void balance_value.offsetWidth;
-    balance_value.classList.add("is-updated");
+    balance_value.classList.add("is_updated");
   }
 
   return { profile, set_balance };
