@@ -56,6 +56,7 @@ export function create_result_card(item, { on_sell, on_keep }) {
   };
 
   keep_btn.addEventListener("click", () => {
+    wrapper.classList.add("is_kept");
     wrapper.classList.add("is_leaving");
     wrapper.addEventListener("animationend", () => wrapper.remove(), {
       once: true,
@@ -85,7 +86,9 @@ export function create_result_card(item, { on_sell, on_keep }) {
     status.textContent = "Vendido!";
   };
 
-  wrapper.is_sold = () => wrapper.classList.contains("is_sold");
+  wrapper.is_pending = () =>
+    !wrapper.classList.contains("is_sold") &&
+    !wrapper.classList.contains("is_kept");
 
   return wrapper;
 }

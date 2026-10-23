@@ -41,7 +41,7 @@ export function create_result_modal() {
   footer.className = "result_footer";
   footer.append(sell_all_btn, close_btn);
 
-  overlay.append(cards, feedback, footer); 
+  overlay.append(cards, feedback, footer);
   document.body.appendChild(overlay);
 
   let on_close_cb = null;
@@ -69,20 +69,23 @@ export function create_result_modal() {
           await on_sell(it);
           refresh_sell_all();
         },
-        on_keep: () => {},
+        on_keep: () => refresh_sell_all(),
       });
       cards.appendChild(el);
       return { item, el };
     });
 
-    const pending = () => entries.filter(({ el }) => !el.is_sold());
+    const pending = () => entries.filter(({ el }) => el.is_pending());
 
     function refresh_sell_all() {
       const left = pending();
-      if (left.length === 0) {
+
+      // "Vender tudo" só faz sentido com 2 ou mais itens pendentes
+      if (left.length < 2) {
         sell_all_btn.hidden = true;
         return;
       }
+
       const total = left.reduce((sum, { item }) => sum + Number(item.price), 0);
       sell_all_btn.textContent = `Vender tudo ${format_price(total)}`;
       sell_all_btn.hidden = false;
@@ -91,7 +94,7 @@ export function create_result_modal() {
 
     sell_all_btn.onclick = async () => {
       const left = pending();
-      if (left.length === 0) return;
+      if (left.length < 2) return;
 
       sell_all_btn.disabled = true;
       try {
@@ -105,11 +108,7 @@ export function create_result_modal() {
       }
     };
 
-    if (entries.length > 1) {
-      refresh_sell_all();
-    } else {
-      sell_all_btn.hidden = true;
-    }
+    refresh_sell_all(); // já decide se mostra ou não
 
     const total_value = items.reduce((sum, w) => sum + Number(w.price), 0);
     feedback.hidden = !(total_value < cost);
