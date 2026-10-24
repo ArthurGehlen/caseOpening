@@ -7,34 +7,64 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>Case Opening - Dashboard</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
     <script type="module" src="js/pages/dashboard.js"></script>
   </head>
   <body>
-    <main class="container">
-      <h1 class="page_title">Dashboard</h1>
-
+    <main class="container dash">
       <p id="message" class="form_message is_error" role="alert" hidden></p>
 
-      <section id="stats_grid" class="stats_grid"></section>
+      <header class="hero">
+        <p class="eyebrow">Saldo Total</p>
+        <p id="net_worth" class="hero_value">R$ 0,00</p>
 
-      <div class="dash_columns">
-        <section class="dash_panel">
-          <h2><i class="fa-solid fa-trophy"></i> Ranking</h2>
-          <ol id="leaderboard" class="leaderboard"></ol>
+        <div class="split" aria-hidden="true">
+          <span id="split_balance" class="split_part is_balance"></span>
+          <span id="split_inventory" class="split_part is_inventory"></span>
+        </div>
+
+        <dl class="legend">
+          <div class="legend_item is_balance">
+            <dt>Saldo</dt>
+            <dd id="balance">R$ 0,00</dd>
+          </div>
+          <div class="legend_item is_inventory">
+            <dt>Inventário</dt>
+            <dd id="inventory_value">R$ 0,00</dd>
+          </div>
+        </dl>
+      </header>
+
+      <dl class="stats">
+        <div class="stat">
+          <dt>Caixas abertas</dt>
+          <dd id="stat_openings">0</dd>
+        </div>
+        <div class="stat">
+          <dt>Total gasto</dt>
+          <dd id="stat_spent">R$ 0,00</dd>
+        </div>
+        <div class="stat">
+          <dt>Média por caixa</dt>
+          <dd id="stat_average">R$ 0,00</dd>
+        </div>
+        <div class="stat">
+          <dt>Itens guardados</dt>
+          <dd id="stat_items">0</dd>
+        </div>
+      </dl>
+
+      <div class="panels">
+        <section class="panel">
+          <h2 id="board_title" class="panel_title">Ranking</h2>
+          <ol id="leaderboard" class="rows"></ol>
         </section>
 
-        <section class="dash_panel">
-          <h2>
-            <i class="fa-solid fa-clock-rotate-left"></i> Últimas aberturas
-          </h2>
-          <ul id="recent" class="recent"></ul>
+        <section class="panel">
+          <h2 id="recent_title" class="panel_title">Últimas aberturas</h2>
+          <ul id="recent" class="rows"></ul>
         </section>
       </div>
     </main>
