@@ -16,7 +16,7 @@ export async function get_case(id) {
     .eq("id", id)
     .single();
   if (error) throw error;
-  return data;
+  return { ...data, price: Number(data.price) };
 }
 
 // para a próxima etapa (tela da caixa)
@@ -29,12 +29,18 @@ export async function open_cases(case_id, quantity) {
   return data;
 }
 
-// itens que pertencem a uma caixa (para a fita decorativa)
+// itens da caixa com o peso de cada um (base das probabilidades)
 export async function list_case_items(case_id) {
   const { data, error } = await supabase
     .from("case_items")
-    .select("items(id, name, rarity, img, price)")
-    .eq("case_id", case_id);
+    .select("weight, items(id, name, rarity, img, price)")
+    .eq("case_id", case_id)
+    .gt("weight", 0);
   if (error) throw error;
-  return data.map((row) => row.items);
+
+  return data.map((row) => ({
+    ...row.items,
+    price: Number(row.items.price),
+    weight: Number(row.weight),
+  }));
 }

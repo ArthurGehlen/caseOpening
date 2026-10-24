@@ -1,140 +1,224 @@
+.case {
+  --gap: clamp(1.5rem, 5vw, 3rem);
+  display: grid;
+  gap: var(--gap);
+}
+
 .back_link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-bottom: 1rem;
+  justify-self: start;
   color: var(--muted);
-  text-decoration: none;
   font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.15s ease;
 }
 
 .back_link:hover {
   color: var(--text);
 }
 
-.tracks {
-  display: flex;
-  flex-direction: column;
+.case_head {
+  display: grid;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+}
+
+.case_title {
+  font-size: clamp(2rem, 1rem + 5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.stage {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.tracks {
+  display: grid;
+  gap: 0.75rem;
 }
 
 .viewport {
-  position: relative;
-  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding-block: 1rem;
   overflow: hidden;
-  padding: 1rem 0;
   background: var(--surface);
   border-radius: var(--radius);
 }
 
+.viewport > * {
+  grid-area: 1 / 1;
+}
+
 .track {
-  position: relative; /* necessário para o offsetLeft */
+  position: relative;
   display: flex;
   gap: 0.6rem;
   will-change: transform;
 }
 
 .marker {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--accent);
   z-index: 2;
-  transform: translateX(-50%);
+  justify-self: center;
+  inline-size: 3px;
+  background: var(--accent);
   box-shadow: 0 0 10px var(--accent);
 }
 
-/* fade nas bordas para dar profundidade */
 .viewport::before,
 .viewport::after {
   content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 15%;
+  grid-area: 1 / 1;
   z-index: 1;
+  inline-size: 15%;
   pointer-events: none;
 }
+
 .viewport::before {
-  left: 0;
+  justify-self: start;
   background: linear-gradient(to right, var(--surface), transparent);
 }
+
 .viewport::after {
-  right: 0;
+  justify-self: end;
   background: linear-gradient(to left, var(--surface), transparent);
 }
 
 .card {
-  flex: 0 0 12rem;
-  height: 12rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 0 0 clamp(5.5rem, 22vw, 8rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
   padding: 0.5rem;
   background: var(--surface-2);
-  border-bottom: 4px solid var(--color);
+  border-block-end: 4px solid var(--color);
   border-radius: 6px;
 }
 
 .card img {
-  width: 100%;
-  height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
   object-fit: contain;
 }
 
 .controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  align-items: end;
+  gap: 1rem 1.5rem;
 }
 
 .qty {
-  display: flex;
-  align-items: center;
+  display: grid;
   gap: 0.5rem;
+}
+
+.qty_head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
   color: var(--muted);
+  font-size: 0.85rem;
 }
 
-.qty input {
-  width: 4rem;
-  padding: 0.5rem;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  background: var(--surface-2);
+.qty_head output {
   color: var(--text);
-  font-size: 1rem;
-}
-
-.qty input:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-
-.cost {
-  color: var(--accent);
+  font-size: 1.25rem;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
-.form_message {
-  margin-bottom: 1rem;
-  padding: 0.6rem 0.8rem;
-  border-radius: 6px;
+.qty input[type="range"] {
+  inline-size: 100%;
+  block-size: 2rem;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.qty input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.total {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.total span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.total strong {
+  color: var(--accent);
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  font-variant-numeric: tabular-nums;
+}
+
+.spin_btn {
+  min-block-size: 3rem;
+  font-size: 1.05rem;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.note[hidden] {
+  display: none;
+}
+
+.odds {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.odds_row {
+  --color: #888;
+  grid-template-columns: 0.25rem 3rem minmax(0, 1fr) auto;
+  padding-inline-end: 0.75rem;
+  /* barra de dados: largura proporcional ao peso do item */
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--color) 14%, transparent) var(--pct),
+    transparent var(--pct)
+  );
+}
+
+.odds_img {
+  inline-size: 3rem;
+  block-size: 3rem;
+  object-fit: contain;
+}
+
+.odds_info {
+  display: grid;
+  min-inline-size: 0;
+}
+
+.odds_name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 0.9rem;
+  font-weight: 600;
 }
 
-.form_message.is_error {
-  background: rgb(242 103 103 / 0.15);
-  color: var(--danger);
+.odds_meta {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 0.75rem;
 }
 
-.negative_amount {
-  color: var(--danger);
-}
-
-.positive_amount {
-  color: var(--success);
+.odds_chance {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }

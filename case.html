@@ -6,39 +6,81 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <title>Case Opening - Caixa</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
+    <title>Caixa</title>
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/ui.css" />
     <link rel="stylesheet" href="css/case.css" />
     <link rel="stylesheet" href="css/result.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script type="module" src="js/pages/case.js"></script>
   </head>
   <body>
-    <main class="container">
-      <a href="home.html" class="back_link">
-        <i class="fa-solid fa-arrow-left"></i> Voltar
-      </a>
-
-      <h1 id="case_title" class="page_title">Carregando...</h1>
-
-      <section id="main_viewport" class="tracks"></section>
+    <main class="container case">
+      <a href="home.html" class="back_link">Voltar para as caixas</a>
 
       <p id="message" class="form_message is_error" role="alert" hidden></p>
 
-      <section class="controls">
-        <label class="qty">
-          Caixas
-          <input type="number" id="cases_quantity" min="1" max="5" value="1" />
-        </label>
-        <span id="cost_label" class="cost"></span>
-        <button type="button" id="spin_btn" class="btn_primary">
-          Abrir caixa
-        </button>
+      <header class="case_head">
+        <p class="eyebrow">Caixa</p>
+        <h1 id="case_title" class="case_title">Carregando...</h1>
+
+        <dl class="stats">
+          <div class="stat">
+            <dt>Preço</dt>
+            <dd id="stat_price">–</dd>
+          </div>
+          <div class="stat">
+            <dt>Melhor prêmio</dt>
+            <dd id="stat_best">–</dd>
+          </div>
+          <div class="stat">
+            <dt>Chance de lucro</dt>
+            <dd id="stat_profit">–</dd>
+          </div>
+          <div class="stat">
+            <dt>Itens</dt>
+            <dd id="stat_items">–</dd>
+          </div>
+        </dl>
+      </header>
+
+      <section class="stage" aria-label="Abrir caixa">
+        <div id="main_viewport" class="tracks"></div>
+
+        <div class="controls">
+          <label class="qty">
+            <span class="qty_head">
+              <span>Quantidade</span>
+              <output id="qty_output">1</output>
+            </span>
+            <input
+              type="range"
+              id="cases_quantity"
+              min="1"
+              max="15"
+              value="1"
+            />
+          </label>
+
+          <div class="total">
+            <span>Total</span>
+            <strong id="cost_label">–</strong>
+          </div>
+
+          <button type="button" id="spin_btn" class="btn_primary spin_btn">
+            Abrir caixa
+          </button>
+        </div>
+
+        <p id="tracks_note" class="note" hidden></p>
+      </section>
+
+      <section class="odds">
+        <div id="composition" class="composition" aria-hidden="true"></div>
+        <dl id="legend" class="legend"></dl>
+        <ul id="odds_list" class="rows"></ul>
       </section>
     </main>
   </body>

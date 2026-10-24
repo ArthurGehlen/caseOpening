@@ -9,3 +9,6 @@ export const format_date = (iso) =>
     dateStyle: "short",
     timeStyle: "short",
   });
+
+export const format_percent = (value) =>
+  `${Number(value).toLocaleString("pt-BR", { maximumFractionDigits: 2 })}%`;
