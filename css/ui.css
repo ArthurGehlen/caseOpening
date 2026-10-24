@@ -108,3 +108,17 @@
 .form_message[hidden] {
   display: none;
 }
+
+.hero {
+  display: grid;
+  gap: 1rem;
+}
+
+.hero_value {
+  font-size: clamp(2.5rem, 1rem + 8vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}

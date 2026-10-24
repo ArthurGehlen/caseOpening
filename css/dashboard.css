@@ -1,35 +1,8 @@
 .dash {
-  --line: color-mix(in srgb, var(--text) 12%, transparent);
   --gap: clamp(1.5rem, 5vw, 3rem);
 
   display: grid;
   gap: var(--gap);
-}
-
-.dash .form_message[hidden] {
-  display: none;
-}
-
-.hero {
-  display: grid;
-  gap: 1rem;
-}
-
-.eyebrow {
-  color: var(--muted);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.hero_value {
-  font-size: clamp(2.5rem, 1rem + 8vw, 5.5rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  overflow-wrap: anywhere;
 }
 
 .split {
@@ -57,89 +30,11 @@
   background: var(--tone);
 }
 
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem clamp(1rem, 4vw, 2.5rem);
-}
-
-.legend_item {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-}
-
-.legend_item dt {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  color: var(--muted);
-  font-size: 0.85rem;
-}
-
-.legend_item dt::before {
-  content: "";
-  inline-size: 0.6rem;
-  block-size: 0.6rem;
-  border-radius: 50%;
-  background: var(--tone);
-}
-
-.legend_item dd {
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
-  gap: 1.5rem clamp(1rem, 3vw, 2rem);
-}
-
-.stat {
-  display: grid;
-  gap: 0.35rem;
-  padding-block-start: 0.75rem;
-  border-block-start: 2px solid var(--line);
-}
-
-.stat dt {
-  color: var(--muted);
-  font-size: 0.8rem;
-}
-
-.stat dd {
-  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
 .panels {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
   gap: var(--gap);
   align-items: start;
-}
-
-.panel_title {
-  padding-block-end: 0.75rem;
-  border-block-end: 2px solid var(--text);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.rows {
-  list-style: none;
-}
-
-.row {
-  display: grid;
-  align-items: center;
-  gap: 0.75rem;
-  padding-block: 0.7rem;
-  border-block-end: 1px solid var(--line);
 }
 
 .empty {
@@ -254,6 +149,7 @@
 .recent_diff.is_gain {
   color: var(--success);
 }
+
 .recent_diff.is_loss {
   color: var(--danger);
 }
