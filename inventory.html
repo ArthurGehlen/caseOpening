@@ -6,59 +6,57 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <title>Case Opening - Inventário</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
+    <title>Inventário</title>
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/inventory.css" />
     <script type="module" src="js/pages/inventory.js"></script>
   </head>
   <body>
-    <main class="container">
-      <h1 class="page_title">Inventário</h1>
-
-      <section class="inv_summary">
-        <div class="inv_stat">
-          <span class="inv_stat_label">Itens</span>
-          <strong id="stat_count">0</strong>
-        </div>
-        <div class="inv_stat">
-          <span class="inv_stat_label">Valor total</span>
-          <strong id="stat_value">R$ 0,00</strong>
-        </div>
-      </section>
-
-      <section class="inv_toolbar">
-        <select id="filter_rarity">
-          <option value="all">Todas as raridades</option>
-        </select>
-
-        <select id="sort_by">
-          <option value="recent">Mais recentes</option>
-          <option value="price_desc">Maior valor</option>
-          <option value="price_asc">Menor valor</option>
-          <option value="rarity">Raridade</option>
-        </select>
-
-        <label class="inv_select_all">
-          <input type="checkbox" id="select_all" />
-          Selecionar tudo
-        </label>
-
-        <div class="inv_actions">
-          <button type="button" id="sell_selected_btn" class="inv_btn" disabled>
-            Vender selecionados
-          </button>
-        </div>
-      </section>
-
+    <main class="container inv">
       <p id="message" class="form_message is_error" role="alert" hidden></p>
-      <p id="status" class="status">Carregando...</p>
 
-      <section id="inv_grid" class="inv_grid"></section>
+      <header class="hero">
+        <p class="eyebrow">Valor do inventário</p>
+        <p id="total_value" class="hero_value">R$ 0,00</p>
+        <p id="total_count" class="hero_sub">0 itens</p>
+
+        <div id="composition" class="composition" aria-hidden="true"></div>
+      </header>
+
+      <section class="toolbar" aria-label="Filtros">
+        <div
+          id="chips"
+          class="chips"
+          role="group"
+          aria-label="Filtrar por raridade"
+        ></div>
+
+        <label class="sort">
+          <span>Ordenar</span>
+          <select id="sort_by">
+            <option value="recent">Mais recentes</option>
+            <option value="price_desc">Maior valor</option>
+            <option value="price_asc">Menor valor</option>
+            <option value="rarity">Raridade</option>
+          </select>
+        </label>
+      </section>
+
+      <p id="status" class="status" hidden></p>
+
+      <ul id="grid" class="grid"></ul>
+
+      <div id="actionbar" class="actionbar" hidden>
+        <label class="actionbar_all">
+          <input type="checkbox" id="select_all" />
+          <span>Selecionar visíveis</span>
+        </label>
+        <p id="selection_info" class="actionbar_info"></p>
+        <button type="button" id="sell_selected_btn" class="actionbar_btn">
+          Vender
+        </button>
+      </div>
     </main>
   </body>
 </html>
