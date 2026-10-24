@@ -7,7 +7,7 @@ import {
   list_case_items,
   open_cases,
 } from "../services/caseService.js";
-import { sell_item, sell_items } from "../services/inventoryService.js";
+import { sell_items } from "../services/inventoryService.js";
 import { RARITIES, MAX_CASES } from "../utils/constants.js";
 import { format_price, format_percent } from "../utils/format.js";
 
@@ -225,11 +225,8 @@ async function handle_spin() {
     fire_confetti(winners);
     modal.open(winners, {
       cost: current_case.price * winners.length,
-      on_sell: async (item) => {
-        navbar.set_balance(await sell_item(item.inventory_id));
-      },
-      on_sell_all: async (items) => {
-        navbar.set_balance(await sell_items(items.map((i) => i.inventory_id)));
+      on_sell: async (ids) => {
+        navbar.set_balance(await sell_items(ids));
       },
       on_close: () => set_busy(false),
     });

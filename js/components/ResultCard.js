@@ -3,51 +3,62 @@ import { format_price } from "../utils/format.js";
 
 const IMAGE_FALLBACK = "./img/placeholder.png";
 
-function create_el(tag, class_name, text) {
-  const el = document.createElement(tag);
-  if (class_name) el.className = class_name;
-  if (text) el.textContent = text;
-  return el;
+function el(tag, class_name, text) {
+  const node = document.createElement(tag);
+  if (class_name) node.className = class_name;
+  if (text !== undefined) node.textContent = text;
+  return node;
 }
 
 /**
- * @param {object} item  { inventory_id, name, rarity, img, price }
+ * @param {object} group  { id, name, rarity, img, price, count, inventory_ids }
  * @param {object} handlers
- *   on_sell(item): Promise  -> chama o servidor
- *   on_keep(item): void     -> só fecha o card
+ *   on_sell(inventory_ids): Promise  -> vende no servidor
+ *   on_change(): void                -> avisa o modal que o estado mudou
  */
-export function create_result_card(item, { on_sell, on_keep }) {
-  const rarity = RARITIES[item.rarity];
+export function create_result_card(group, { on_sell, on_change }) {
+  const rarity = RARITIES[group.rarity];
+  const total = group.price * group.count;
 
-  const wrapper = create_el("article", "result_wrapper");
-  wrapper.style.setProperty("--color", rarity?.color ?? "#888");
+  const card = el("article", "result_card");
+  card.style.setProperty("--color", rarity?.color ?? "#888");
 
-  const img = create_el("img", "result_img");
-  img.src = item.img || IMAGE_FALLBACK;
-  img.alt = item.name;
-  img.title = item.name;
+  // imagem e contador na mesma célula do grid (sem position:absolute)
+  const figure = el("div", "result_figure");
+  const img = el("img", "result_img");
+  img.src = group.img || IMAGE_FALLBACK;
+  img.alt = group.name;
   img.addEventListener("error", () => (img.src = IMAGE_FALLBACK), {
     once: true,
   });
+  figure.append(img);
+  if (group.count > 1)
+    figure.append(el("span", "result_count", `×${group.count}`));
 
-  const rarity_label = create_el(
-    "span",
-    "result_rarity",
-    rarity?.label ?? "Desconhecida",
+  const info = el("div", "result_info");
+  info.append(
+    el("span", "result_rarity", rarity?.label ?? "Desconhecida"),
+    el("span", "result_name", group.name),
+    el("span", "result_value", format_price(total)),
   );
-  const name = create_el("p", "result_name", item.name);
-  const value = create_el("p", "result_value", format_price(item.price));
-  const status = create_el("p", "result_status");
+  if (group.count > 1) {
+    info.append(
+      el("small", "result_each", `${format_price(group.price)} cada`),
+    );
+  }
 
-  const actions = create_el("div", "result_actions_wrapper");
-  const keep_btn = create_el("button", "keep_skin_btn", "Guardar");
-  const sell_btn = create_el(
+  const status = el("p", "result_status");
+
+  const keep_btn = el("button", "result_btn", "Guardar");
+  const sell_btn = el(
     "button",
-    "sell_skin_btn",
-    `Vender ${format_price(item.price)}`,
+    "result_btn is_sell",
+    `Vender ${format_price(total)}`,
   );
   keep_btn.type = "button";
   sell_btn.type = "button";
+
+  const actions = el("div", "result_actions");
   actions.append(keep_btn, sell_btn);
 
   const set_busy = (busy) => {
@@ -55,22 +66,20 @@ export function create_result_card(item, { on_sell, on_keep }) {
     sell_btn.disabled = busy;
   };
 
-  keep_btn.addEventListener("click", () => {
-    wrapper.classList.add("is_kept");
-    wrapper.classList.add("is_leaving");
-    wrapper.addEventListener("animationend", () => wrapper.remove(), {
-      once: true,
-    });
-    on_keep?.(item);
-  });
+  function settle(class_name, text) {
+    card.classList.add(class_name);
+    actions.remove();
+    status.textContent = text;
+    on_change?.();
+  }
+
+  keep_btn.addEventListener("click", () => settle("is_kept", "No inventário"));
 
   sell_btn.addEventListener("click", async () => {
     set_busy(true);
     try {
-      await on_sell(item);
-      wrapper.classList.add("is_sold");
-      actions.remove();
-      status.textContent = "Vendido!";
+      await on_sell(group.inventory_ids);
+      settle("is_sold", "Vendido");
     } catch (err) {
       console.error(err);
       status.textContent = "Erro ao vender.";
@@ -78,17 +87,12 @@ export function create_result_card(item, { on_sell, on_keep }) {
     }
   });
 
-  wrapper.append(img, rarity_label, name, value, status, actions);
+  card.append(figure, info, status, actions);
 
-  wrapper.mark_sold = () => {
-    wrapper.classList.add("is_sold");
-    actions.remove();
-    status.textContent = "Vendido!";
-  };
+  // usados pelo modal no "Vender tudo"
+  card.is_pending = () =>
+    !card.classList.contains("is_sold") && !card.classList.contains("is_kept");
+  card.mark_sold = () => settle("is_sold", "Vendido");
 
-  wrapper.is_pending = () =>
-    !wrapper.classList.contains("is_sold") &&
-    !wrapper.classList.contains("is_kept");
-
-  return wrapper;
+  return card;
 }
