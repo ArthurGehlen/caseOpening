@@ -3,10 +3,23 @@ import { supabase } from "../supabaseClient.js";
 export async function list_cases() {
   const { data, error } = await supabase
     .from("cases")
-    .select("id, name, img, price")
+    .select("id, name, img, price, case_items(weight, items(rarity, price))")
     .order("price", { ascending: true });
   if (error) throw error;
-  return data;
+
+  return data.map((c) => ({
+    id: c.id,
+    name: c.name,
+    img: c.img,
+    price: Number(c.price),
+    items: c.case_items
+      .filter((ci) => Number(ci.weight) > 0)
+      .map((ci) => ({
+        weight: Number(ci.weight),
+        rarity: ci.items.rarity,
+        price: Number(ci.items.price),
+      })),
+  }));
 }
 
 export async function get_case(id) {

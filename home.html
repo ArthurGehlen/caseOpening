@@ -13,16 +13,18 @@
     <link rel="stylesheet" href="css/home.css" />
     <link rel="shortcut icon" href="./favicon.ico?v=2" type="image/x-icon" />
     <script type="module" src="js/pages/home.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
   </head>
   <body>
-    <main class="container">
-      <h1 class="page_title">Escolha uma caixa</h1>
+    <main class="container home">
+      <header class="home_head">
+        <p class="eyebrow">Catálogo</p>
+        <h1 class="home_title">Caixas</h1>
+        <p id="home_sub" class="home_sub"></p>
+      </header>
+
       <p id="status" class="status">Carregando...</p>
-      <section id="cases_grid" class="cases_grid"></section>
+
+      <ul id="cases_grid" class="tiles"></ul>
     </main>
   </body>
 </html>
