@@ -53,7 +53,7 @@ export function create_result_modal() {
   const feedback = el("figure", "result_feedback");
   feedback.hidden = true;
   const feedback_img = el("img");
-  feedback_img.src = "./img/result.jpeg";
+  feedback_img.src = "./assets/result.jpeg";
   feedback_img.alt = "Mineiro desistindo a poucos centímetros dos diamantes";
   feedback_img.addEventListener("error", () => (feedback.hidden = true), {
     once: true,
