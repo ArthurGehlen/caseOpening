@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Case Opening - Mercado</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/ui.css" />
+    <link rel="stylesheet" href="../css/market.css" />
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+    <script type="module" src="../js/pages/market.js"></script>
+  </head>
+  <body>
+    <main class="container market">
+      <p id="message" class="form_message is_error" role="alert" hidden></p>
+
+      <header class="hero">
+        <p class="eyebrow">Índice do mercado · base 100</p>
+        <p id="index_value" class="hero_value">–</p>
+        <p id="index_sub" class="hero_sub"></p>
+
+        <div id="breadth" class="composition" aria-hidden="true"></div>
+        <dl id="breadth_legend" class="legend"></dl>
+      </header>
+
+      <dl id="movers" class="stats"></dl>
+
+      <div class="workspace">
+        <!-- detalhe: gráfico do índice ou do item selecionado -->
+        <section id="detail" class="detail">
+          <header class="detail_head">
+            <img id="detail_img" class="detail_img" alt="" hidden />
+            <div class="detail_heading">
+              <p id="detail_kicker" class="eyebrow">
+                Todos os itens · base 100
+              </p>
+              <h2 id="detail_title" class="detail_title">Índice do mercado</h2>
+            </div>
+            <button type="button" id="detail_reset" class="link_btn" hidden>
+              Ver índice
+            </button>
+          </header>
+
+          <div class="readout">
+            <output id="readout_value" class="readout_value">–</output>
+            <span id="readout_change" class="readout_change"></span>
+            <span id="readout_date" class="readout_date"></span>
+          </div>
+
+          <div id="chart" class="chart" role="img"></div>
+
+          <div id="ranges" class="segmented" role="group">
+            <button type="button" data-value="7" aria-pressed="false">
+              7D
+            </button>
+            <button type="button" data-value="30" aria-pressed="true">
+              30D
+            </button>
+            <button type="button" data-value="90" aria-pressed="false">
+              90D
+            </button>
+          </div>
+
+          <dl id="detail_stats" class="stats stats_compact"></dl>
+
+          <div id="gauge_wrap" class="gauge_wrap" hidden>
+            <div class="gauge_head">
+              <span>Faixa de mercado</span>
+              <span id="gauge_label"></span>
+            </div>
+            <div class="gauge">
+              <span id="gauge_marker" class="gauge_marker"></span>
+            </div>
+            <div class="gauge_scale">
+              <span>−20%</span><span>âncora</span><span>+20%</span>
+            </div>
+          </div>
+
+          <div id="cases_wrap" class="cases_wrap" hidden>
+            <h3 class="panel_title">Disponível em</h3>
+            <ul id="detail_cases" class="case_links"></ul>
+          </div>
+        </section>
+
+        <!-- lista de itens -->
+        <section class="board" aria-labelledby="board_title">
+          <h2 id="board_title" class="panel_title">Itens</h2>
+
+          <div class="toolbar">
+            <label class="search">
+              <input
+                type="search"
+                id="search"
+                placeholder="Buscar item"
+                autocomplete="off"
+              />
+            </label>
+
+            <div id="chips" class="chips" role="group"></div>
+
+            <div class="toolbar_row">
+              <div id="periods" class="segmented" role="group">
+                <button type="button" data-value="1" aria-pressed="true">
+                  24h
+                </button>
+                <button type="button" data-value="7" aria-pressed="false">
+                  7d
+                </button>
+                <button type="button" data-value="30" aria-pressed="false">
+                  30d
+                </button>
+              </div>
+
+              <label class="sort">
+                <span>Ordenar</span>
+                <select id="sort_by">
+                  <option value="gain">Maior alta</option>
+                  <option value="loss">Maior queda</option>
+                  <option value="price_desc">Maior preço</option>
+                  <option value="price_asc">Menor preço</option>
+                  <option value="rarity">Raridade</option>
+                  <option value="name">Nome</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <p id="status" class="status" hidden></p>
+          <ul id="list" class="mk_list"></ul>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

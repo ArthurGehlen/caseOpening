@@ -4,12 +4,30 @@ import { format_price } from "../utils/format.js";
 
 const NAV_LINKS = [
   { href: "home.html", label: "Caixas" },
+  { href: "market.html", label: "Mercado", badge: "Novo" },
   { href: "inventory.html", label: "Inventário" },
   { href: "dashboard.html", label: "Dashboard" },
 ];
 
 const BONUS_COOLDOWN_MS = 24 * 60 * 60 * 1000;
 const BONUS_SYNC_KEY = "navbar:bonus-claimed";
+
+// a etiqueta some depois que a pessoa visita a página
+const seen_key = (href) => `nav_seen:${href}`;
+
+function was_seen(href) {
+  try {
+    return localStorage.getItem(seen_key(href)) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function mark_seen(href) {
+  try {
+    localStorage.setItem(seen_key(href), "1");
+  } catch {}
+}
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -58,16 +76,20 @@ export async function mount_navbar() {
 `;
 
   const links = el("div", "navbar__links");
-  NAV_LINKS.forEach(({ href, label }) => {
-    const link = el("a", "navbar__link", label);
+  NAV_LINKS.forEach(({ href, label, badge }) => {
+    const link = el("a", "navbar__link");
     link.href = href;
+    link.append(el("span", "navbar__link-label", label));
+
+    if (badge && !was_seen(href))
+      link.append(el("span", "navbar__badge", badge));
+
     if (href === current) {
       link.classList.add("is_active");
       link.setAttribute("aria-current", "page");
-      requestAnimationFrame(() =>
-        link.scrollIntoView({ inline: "center", block: "nearest" }),
-      );
+      if (badge) mark_seen(href);
     }
+
     links.appendChild(link);
   });
 
