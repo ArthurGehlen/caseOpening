@@ -5,10 +5,8 @@ import {
   get_leaderboard,
   list_recent_openings,
 } from "../services/statsService.js";
-import { RARITIES } from "../utils/constants.js";
+import { RARITIES, IMAGE_FALLBACK } from "../utils/constants.js";
 import { format_price, format_date } from "../utils/format.js";
-
-const IMAGE_FALLBACK = "./img/placeholder.png";
 
 const session = await require_auth();
 if (!session) throw new Error("Sem sessão");

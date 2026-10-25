@@ -5,10 +5,9 @@ import {
   list_price_history,
   list_item_cases,
 } from "../services/marketService.js";
-import { RARITIES } from "../utils/constants.js";
+import { RARITIES, IMAGE_FALLBACK } from "../utils/constants.js";
 import { format_price } from "../utils/format.js";
 
-const IMAGE_FALLBACK = "./img/placeholder.png";
 const RARITY_ORDER = Object.keys(RARITIES); // do mais comum ao mais raro
 const HISTORY_DAYS = 90;
 const DAY = 86400;

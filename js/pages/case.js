@@ -8,10 +8,9 @@ import {
   open_cases,
 } from "../services/caseService.js";
 import { sell_items } from "../services/inventoryService.js";
-import { RARITIES, MAX_CASES } from "../utils/constants.js";
+import { RARITIES, MAX_CASES, IMAGE_FALLBACK } from "../utils/constants.js";
 import { format_price, format_percent } from "../utils/format.js";
 
-const IMAGE_FALLBACK = "./img/placeholder.png";
 const MAX_TRACKS = 3;
 const RARITY_ORDER = Object.keys(RARITIES);
 

@@ -1,7 +1,5 @@
-import { RARITIES } from "../utils/constants.js";
+import { RARITIES, IMAGE_FALLBACK } from "../utils/constants.js";
 import { format_price } from "../utils/format.js";
-
-const IMAGE_FALLBACK = "./img/placeholder.png";
 
 function el(tag, class_name, text) {
   const node = document.createElement(tag);

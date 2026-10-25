@@ -1,10 +1,9 @@
 import { require_auth } from "../utils/guard.js";
 import { mount_navbar } from "../components/navbar.js";
 import { list_cases } from "../services/caseService.js";
-import { RARITIES } from "../utils/constants.js";
+import { RARITIES, IMAGE_FALLBACK } from "../utils/constants.js";
 import { format_price, format_percent } from "../utils/format.js";
 
-const IMAGE_FALLBACK = "./img/cases/placeholder.png";
 const RARITY_ORDER = Object.keys(RARITIES); // do mais comum ao mais raro
 
 const session = await require_auth();
